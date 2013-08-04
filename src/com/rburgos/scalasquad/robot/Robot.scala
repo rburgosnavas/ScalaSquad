@@ -9,17 +9,12 @@ class Robot(data: Data, plateau: Plateau) {
   private var _x = data.x
   private var _y = data.y
   private var _state = StateMatcher.initState(data.position, this, plateau)
-  private val _north = new NorthState(this, plateau)
-  private val _south = new SouthState(this, plateau)
-  private val _east = new EastState(this, plateau)
-  private val _west = new WestState(this, plateau)
 
   def turnLeft() { _state.turnLeft() }
   def turnRight() { _state.turnRight() }
   def move() { _state.move() }
   def moveOnCommand() {
-    if(data.commands != null)
-    {
+    if(data.commands != null) {
       for(char <- data.commands) char match {
         case 'L' => this.turnLeft()
         case 'R' => this.turnRight()
@@ -35,9 +30,5 @@ class Robot(data: Data, plateau: Plateau) {
   def y_=(y: Int) { this._y = y }
   def state: CardinalState = { this._state }
   def state_=(state: CardinalState) { this._state = state }
-  def north: CardinalState = { this._north }
-  def south: CardinalState = { this._south }
-  def east: CardinalState = { this._east }
-  def west: CardinalState = { this._west }
   override def toString: String = { _x + ", " + _y + ", " + state }
 }
